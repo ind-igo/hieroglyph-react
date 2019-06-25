@@ -1,0 +1,47 @@
+.App {
+	text-align: center;
+}
+
+header {
+	text-align: center;
+}
+iframe {
+	display: none;
+	/* margin:0 auto; */
+	align-self: center;
+	justify-self: center;
+}
+p {
+	text-align: center;
+	align-self: center;
+	justify-self: center;
+}
+#logo {
+	padding-top: 10px;
+	padding-bottom: 15px;
+}
+
+.transcript-bar {
+	padding-bottom: 30px;
+
+	h5 {
+		float: left;
+	}
+
+	button {
+		float: right;
+	}
+}
+
+iframe {
+	border: 0px;
+	width: 500px;
+	height: 316px;
+	margin: auto;
+	display: none;
+}
+
+input-error {
+	color: red;
+	border-color: red;
+}
