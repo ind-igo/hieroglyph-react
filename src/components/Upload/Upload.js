@@ -1,3 +1,5 @@
+require('dotenv').config();
+const { AWS_API } = process.env;
 import React, { Component } from 'react';
 import axios from 'axios';
 import './Upload.scss';
@@ -92,7 +94,9 @@ export default class Upload extends Component {
 	getTranscript = () => {
 		const { urlInput } = this.state;
 		console.log(urlInput);
-		const awsUrl = axios
+		const awsUrl =
+			'https://3iy19oh41a.execute-api.us-east-1.amazonaws.com/test/transcribe';
+		axios
 			.post(awsUrl, { urlInput })
 			.then(res => {
 				this.setState({ transcript: res.data.body });
