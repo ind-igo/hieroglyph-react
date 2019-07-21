@@ -3,8 +3,8 @@ const getSubtitles = require('youtube-captions-scraper').getSubtitles;
 const ytRegex = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
 
 module.exports = {
-	fetchTranscript: (req, res) => {
-		const { url, title } = req.body;
+	fetch: (req, res) => {
+		const { url } = req.body;
 		const videoId = url.match(ytRegex)[1];
 
 		getSubtitles({

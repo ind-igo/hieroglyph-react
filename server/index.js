@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const checkForSession = require('./middlewares/checkForSession');
 const authController = require('./controllers/authController');
-const transcriptorController = require('./controllers/transcriptorController');
+const transcriptController = require('./controllers/transcriptController');
 
 const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING } = process.env;
 
@@ -22,8 +22,6 @@ app.use(
 );
 app.use(checkForSession);
 
-// mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true });
-
 // setup massive
 massive(CONNECTION_STRING).then(db => {
 	app.set('db', db);
@@ -37,6 +35,6 @@ app.post('/api/logout', authController.logout);
 app.get('/api/user', authController.getUser);
 
 // transcriptor endpoints
-app.post('/api/fetch', transcriptorController.fetchTranscript);
+app.post('/api/fetch', transcriptorController.fetch);
 
 app.listen(SERVER_PORT, () => console.log(`listening on port ${SERVER_PORT}`));
