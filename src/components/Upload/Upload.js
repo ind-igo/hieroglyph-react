@@ -1,10 +1,10 @@
-require('dotenv').config();
-const { AWS_API } = process.env;
 import React, { Component } from 'react';
 import axios from 'axios';
 import './Upload.scss';
 import logo from '../../assets/logo.png'; // hieroglyph commercial
+require('dotenv').config();
 
+const { AWS_API } = process.env
 export default class Upload extends Component {
 	constructor() {
 		super();

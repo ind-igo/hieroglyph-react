@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const checkForSession = require('./middlewares/checkForSession');
 const authController = require('./controllers/authController');
+const transcriptorController = require('./controllers/transcriptorController');
 
 const { SERVER_PORT, SESSION_SECRET } = process.env;
 
@@ -28,5 +29,8 @@ app.post('/api/register', authController.register);
 app.post('/api/login', authController.login);
 app.post('/api/logout', authController.logout);
 app.get('/api/user', authController.getUser);
+
+// transcriptor endpoints
+app.post('/api/fetch', transcriptorController.fetchTranscript);
 
 app.listen(SERVER_PORT, () => console.log(`listening on port ${SERVER_PORT}`));

@@ -7,7 +7,7 @@ export default function App() {
 	return (
 		<div className="container">
 			<header>
-				<img id="logo" src={logo} alt="heirogly.ph" />
+				<img id="logo" src={logo} alt="Heirogly.ph" />
 			</header>
 			{routes}
 		</div>
