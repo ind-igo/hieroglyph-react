@@ -35,6 +35,6 @@ app.post('/api/logout', authController.logout);
 app.get('/api/user', authController.getUser);
 
 // transcriptor endpoints
-app.post('/api/fetch', transcriptorController.fetch);
+app.post('/api/fetch', transcriptController.fetch);
 
 app.listen(SERVER_PORT, () => console.log(`listening on port ${SERVER_PORT}`));

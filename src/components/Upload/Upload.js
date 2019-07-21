@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './Upload.scss';
-import logo from '../../assets/logo.png'; // hieroglyph commercial
-require('dotenv').config();
 
-const { AWS_API } = process.env
 export default class Upload extends Component {
 	constructor() {
 		super();
 
 		this.state = {
 			// input & validation for sending url
-			urlInput: 'https://www.youtube.com/watch?v=EY6q5dv_B-o',
+			urlInput: '',
 			urlValid: true,
 
 			// transcript
@@ -22,42 +19,42 @@ export default class Upload extends Component {
 
 	render() {
 		return (
-			<div className="container">
+			<div className='container'>
 				{/* Form */}
-				<div id="url-form">
+				<div id='url-form'>
 					<input
-						id="url-input"
-						className="u-full-width"
-						type="text"
-						placeholder="Insert YouTube URL"
+						id='url-input'
+						className='u-full-width'
+						type='text'
+						placeholder='Insert YouTube URL'
 						onChange={e => this.setState({ urlInput: e.target.value })}
 					/>
 					<button
-						id="submit-button"
-						className="u-full-width"
-						onClick={() => this.getTranscript()}
-					>
+						id='submit-button'
+						className='u-full-width'
+						onClick={() => this.getTranscript()}>
 						Submit
 					</button>
 				</div>
 
 				{/* Video Player */}
-				<div id="wrapper">
+				<div id='wrapper'>
 					<iframe
-						title="youtube-frame"
-						id="youtube-iframe"
-						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						title='youtube-frame'
+						id='youtube-iframe'
+						allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
 					/>
 				</div>
 				{/* Button Cluster */}
-				<div className="transcript-bar">
+
+				<div className='transcript-bar'>
 					<h5>Transcript</h5>
-					<button id="show-button" type="button">
+					<button id='show-button' type='button'>
 						Show Youtube Video
 					</button>
 				</div>
 				<hr />
-				<div id="transcript" />
+				<div id='transcript' />
 
 				{/* If page cannot load (required by Azure) */}
 				{/* <div class="container">
@@ -93,11 +90,9 @@ export default class Upload extends Component {
 
 	getTranscript = () => {
 		const { urlInput } = this.state;
-		console.log(urlInput);
-		const awsUrl =
-			'https://3iy19oh41a.execute-api.us-east-1.amazonaws.com/test/transcribe';
+
 		axios
-			.post(awsUrl, { urlInput })
+			.post('/api/fetch', { url: urlInput })
 			.then(res => {
 				this.setState({ transcript: res.data.body });
 				console.log(this.state.transcript);

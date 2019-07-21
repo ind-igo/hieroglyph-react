@@ -5,6 +5,7 @@ const ytRegex = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v
 module.exports = {
 	fetch: (req, res) => {
 		const { url } = req.body;
+		console.log(url);
 		const videoId = url.match(ytRegex)[1];
 
 		getSubtitles({
