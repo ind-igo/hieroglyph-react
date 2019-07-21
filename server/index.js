@@ -25,11 +25,13 @@ app.use(checkForSession);
 // mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true });
 
 // setup massive
-massive(CONNECTION_STRING).
+massive(CONNECTION_STRING).then(db => {
+	app.set('db', db);
+	console.log('connected to db');
+});
 
 // auth endpoints
-.app
-	.post('/api/register', authController.register);
+app.post('/api/register', authController.register);
 app.post('/api/login', authController.login);
 app.post('/api/logout', authController.logout);
 app.get('/api/user', authController.getUser);
