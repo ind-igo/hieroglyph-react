@@ -5,7 +5,6 @@ const ytRegex = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v
 module.exports = {
 	fetch: (req, res) => {
 		const { url } = req.body;
-		console.log(url);
 		const videoId = url.match(ytRegex)[1];
 
 		getSubtitles({
@@ -17,15 +16,32 @@ module.exports = {
 			for (const element of transcript) {
 				fullTextArray.push(element.text);
 			}
-			const fullText = fullTextArray.join();
+			const fullText = fullTextArray.join(' ');
 
-			const db = req.app.get('db');
-			const title = 'example title'; // get from scrapper
+			const title = 'example title'; // get from scraper
 
-			db.add_transcript([url, title, fullText]);
-
-			const response = { transcript: fullText };
+			const response = {
+        url: "fuckoff",
+        title: title,
+        transcript: fullText
+      };
 			res.status(200).send(response);
 		});
-	}
+  },
+  cacheTranscript: (req, res) => {
+    const db = req.app.get('db');
+
+    const { title, url, transcript } = req.body;
+
+    db.hg_transcripts.save({
+      url: url,
+      title: title,
+      transcript: transcript
+    })
+    .then(retval => {
+      console.log(retval)
+    });
+
+    res.status(200).send("all is gud");
+  }
 };
