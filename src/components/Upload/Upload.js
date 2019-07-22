@@ -5,13 +5,9 @@ import './Upload.scss';
 export default class Upload extends Component {
 	constructor() {
 		super();
-
 		this.state = {
-			// input & validation for sending url
-			urlInput: '',
+			url: '',
 			urlValid: true,
-
-			// transcript
 			showVideo: false,
 			transcript: ''
 		};
@@ -27,7 +23,7 @@ export default class Upload extends Component {
 						className='u-full-width'
 						type='text'
 						placeholder='Insert YouTube URL'
-						onChange={e => this.setState({ urlInput: e.target.value })}
+						onChange={e => this.setState({ url: e.target.value })}
 					/>
 					<button
 						id='submit-button'
@@ -55,44 +51,29 @@ export default class Upload extends Component {
 				</div>
 				<hr />
 				<div id='transcript' />
-
-				{/* If page cannot load (required by Azure) */}
-				{/* <div class="container">
-				<h1 style="text-align:center;">Hieroglyph</h1>
-				<h3 style="text-align:center;">404 - Page Not Found</h3>
-			</div> */}
 			</div>
 		);
 	}
 
-	//
-	validateUrlInput = e => {
+	// TDD here
+	validateUrl = e => {
 		e.preventDefault();
 
 		// url input validation
-		const { urlInput } = this.state;
+		const { url } = this.state;
 
 		const regex = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/;
 
-		if (regex.test(urlInput)) {
-			console.log('valid URL');
-			// this.getTranscript(urlInput);
-		} else {
-			console.log('invalid URL');
-			// show invalid message & red input field
+		if (regex.test(url)) console.log('valid URL');
+		else console.log('invalid URL');
 		}
-
-		// later validation features:
-		// turn input field green if valid field
-		// need to either clear out input field after valid submission
-		// turn input field red if invalid input
 	};
 
 	getTranscript = () => {
-		const { urlInput } = this.state;
+		const { url } = this.state;
 
 		axios
-			.post('/api/fetch', { url: urlInput })
+			.post('/api/fetch', { url })
 			.then(res => {
 				this.setState({ transcript: res.data.body });
 				console.log(this.state.transcript);

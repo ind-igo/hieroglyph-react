@@ -4,7 +4,8 @@ import Upload from './components/Upload/Upload';
 
 export default (
 	<Switch>
-		{/* <Route component={Dashboard} exact path="/" /> */}
 		<Route component={Upload} exact path='/' />
+		{/* <Route component={Dashboard} exact path="/dashboard" /> */}
+		{/* <Route component={Login} exact path="/login" /> */}
 	</Switch>
 );
