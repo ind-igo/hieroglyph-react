@@ -4,4 +4,3 @@ CREATE TABLE hg_transcripts (
     title TEXT,
     transcript TEXT
 );
-

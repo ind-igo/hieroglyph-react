@@ -6,8 +6,6 @@ let users = [
 	}
 ];
 
-let id = 1;
-
 module.exports = {
 	// app.post('/api/login', authController.login);
 	login: (req, res) => {
