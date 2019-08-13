@@ -10,8 +10,22 @@ module.exports = {
         text: transcript
       }
     })
-    esClient.ping().then(result => console.log(result));
+    .then(response => console.log(response));
 
-    res.status(200).send("all is gud");
+    res.status(200).send("Item indexed!");
+  },
+
+  search: (req, res) => {
+    const esClient = req.app.locals.esClient;
+    const { searchTerm } = req.body;
+
+    esClient.search({
+      index: 'transcripts',
+      q: searchTerm
+    })
+    .then(resp => console.log(resp))
+    .catch(err => console.log(err));
+
+    res.status(200).send(body);
   }
 };

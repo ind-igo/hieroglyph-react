@@ -49,10 +49,11 @@ app.post('/api/logout', authController.logout);
 app.get('/api/user', authController.getUser);
 
 // transcript endpoints
-app.post('/api/fetch', transcriptController.fetchTranscript);
-app.post('/api/cache', transcriptController.cacheTranscript);
+app.post('/api/fetch', transcriptController.fetch);
+app.post('/api/save', transcriptController.save);
 
 // search endpoints
-app.post('/api/search', searchController.index);
+app.post('/api/index', searchController.index);
+app.post('/api/search', searchController.search);
 
 app.listen(SERVER_PORT, () => console.log(`listening on port ${SERVER_PORT}`));
